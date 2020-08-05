@@ -36,6 +36,7 @@ $(document).ready(function () {
 function search(){
     //console.log("测试搜索按键");
     //搜索框 Alert
+    $('#nav-result').trigger("click");
     var search_block = $("#search_box").val();
     if(!search_block){
         alert("搜索框不能为空");

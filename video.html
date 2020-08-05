@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>小剧场</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <link rel="stylesheet" href="stylesheets/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/video_style.css">
+</head>
+<body data-gr-c-s-loaded="true" >
+
+
+<div class="container pt-5 ">
+    <div class="panel">
+        <h4 class="display-4">小剧场</h4>
+        <!-- 快捷键解释行-->
+        <p>请尽量使用<kbd>中文</kbd>搜索内容，如是外语片，请使用<kbd>官方译名</kbd></p>
+
+        <div class="input-group">
+            <input type="text" class="form-control " id="search_box" placeholder="请输入剧集...">
+            <div class="input-group-append">
+                <button type="button" class="btn btn-outline-secondary" id="submit-block">搜索</button>
+            </div>
+
+        </div>
+
+        <!-- 成功或者失败提示框-->
+        <div id="success-alert" class="alert alert-success fade show" style="display: none">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+
+        </div>
+        <div id="fail-alert"class="alert alert-danger fade show"style="display: none">
+            <button type="button" class="close" data-dismiss="alert" style="display: none">&times;</button>
+
+        </div>
+
+        <div id="result" style="display: none">
+            <!-- Nav tabs -->
+            <ul class="mt-5 nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#search_result">搜索结果</a>
+                </li>
+                <li class="nav-item">
+                    <a id="nav-episode" class="nav-link" data-toggle="tab" href="#episode">剧集列表</a>
+                </li>
+
+            </ul>
+            <!-- Tab panes -->
+            <div class="row tab-content">
+                <div class="mt-2 tab-pane container active" id = "search_result">
+                    <div class="col">
+                        <table id="result-table" class="table table-hover ">
+                            <thead>
+                            <tr>
+                                <th>序号</th>
+                                <th>剧名</th>
+                                <th>类型</th>
+                                <th>日期</th>
+                                <th>封面</th>
+                            </tr>
+                            </thead>
+                            <tbody id="result-tbody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="mt-2 tab-pane container fade" id="episode">
+                    <table id="episode-table" class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>剧名</th>
+                            <th>剧集</th>
+                        </tr>
+                        </thead>
+                        <tbody id="episode-tbody">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-footer">Copyright © 2020 <br>本站不提供数据存储只提供检索服务<br>用户一切行为与本站无关</div>
+
+</div>
+<script type="text/javascript" src="js/main.js"></script>
+</body>
+</html>

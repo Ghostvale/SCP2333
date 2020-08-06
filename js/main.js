@@ -16,16 +16,18 @@ $(document).ready(function () {
         var title = $(this).find("td").eq(1).html();
         var sort = $(this).find("td").eq(2).html();
         var time = $(this).find("td").eq(3).html();
+        //模拟单击剧集页面
         $('#nav-episode').trigger("click");
-        console.log(title +":"+url);
+        //console.log(title +":"+url);
         video(url,title,sort,time);
-
-
     });
 
     //开始检索
     $("#submit-block").click(function () {
         search();
+        //模拟单击结果页面
+        $('#nav-result').trigger("click");
+
     });
 
 });
@@ -35,23 +37,23 @@ $(document).ready(function () {
 //search function
 function search(){
     //console.log("测试搜索按键");
+
     //搜索框 Alert
-    $('#nav-result').trigger("click");
     var search_block = $("#search_box").val();
     if(!search_block){
         alert("搜索框不能为空");
         return;
     }
-    //显示搜索结果panel
-    $("#result").show();
-
+    //显示等待
+    show_waiting_alert();
+    //清空结果
+    $("#result-tbody").empty();
     //返回搜索结果
     var interF_OK = "https://api.okzy.tv/api.php/provide/vod/at/json/?ac=detail";
     $.post(interF_OK,{
             wd: search_block
         },
         function (data,status){
-            $("#result-tbody").empty();
             var jsonObj = jQuery.parseJSON(data);
             var list = jsonObj["list"];
             var number = 0;
@@ -60,17 +62,17 @@ function search(){
                 //console.log(e['vod_name']);
                 $("#result-tbody").append(text);
                 number = index+1;
-            })
-            $("#fail-alert").hide();
-            $("#success-alert").hide();
+            });
             if(number == 0){
-                $("#fail-alert").html("抱歉，未能找到相应的资源！请重新输入剧名。");
-                $("#fail-alert").show();
+                $("#fail-alert").html("(╯°Д°）╯没有啊！啥都没有啊！！！ 咱换个名字好不好啊  (;´༎ຶД༎ຶ`)");
+                show_fail_alert();
+                $("#result").hide();
             }else{
-                $("#success-alert").html("已为您找到"+number+"个资源，请点击对应的词条。")
-                $("#success-alert").show();
+                $("#success-alert").html("٩(˃̶͈̀௰˂̶͈́)و 亲！我找到了"+number+"个资源，快点词条看看吧 o(*////▽////*)q")
+                show_success_alert();
+                //显示搜索结果panel
+                $("#result").show();
             }
-
             console.log(list);
 
         });
@@ -81,7 +83,8 @@ function search(){
 
 //episode detail
 function video(url, title, sort, time) {
-    $("#episode-tbody").empty();
+    var episode_tbody = $("#episode-tbody");
+    episode_tbody.empty();
     var Pri_split = url.split('$$$');
     var text = "";
     Pri_split.forEach(e=>{
@@ -94,14 +97,40 @@ function video(url, title, sort, time) {
         }
 
     })
-    $("#episode-tbody").append(text);
+    episode_tbody.append(text);
     //console.log(url);
 
 }
-//采集地址：https://api.okzy.tv/api.php/provide/vod/at/json/
-// 视频列表地址：https://api.okzy.tv/api.php/provide/vod/at/json/?ac=list
-// 视频详情地址：https://api.okzy.tv/api.php/provide/vod/at/json/?ac=detail
+// OK采集地址：https://api.okzy.tv/api.php/provide/vod/at/json/
+// OK视频列表地址：https://api.okzy.tv/api.php/provide/vod/at/json/?ac=list
+// OK视频详情地址：https://api.okzy.tv/api.php/provide/vod/at/json/?ac=detail
 
+//隐藏提示框
+function hide_all_alert(){
+    $("#fail-alert").hide();
+    $("#success-alert").hide();
+    $("#waiting-alert").hide();
+
+}
+//显示成功提示框
+function show_success_alert(){
+    $("#fail-alert").hide();
+    $("#success-alert").show();
+    $("#waiting-alert").hide();
+}
+//显示失败提示框
+function show_fail_alert() {
+    $("#fail-alert").show();
+    $("#success-alert").hide();
+    $("#waiting-alert").hide();
+
+}
+//显示等待提示框
+function show_waiting_alert(){
+    $("#fail-alert").hide();
+    $("#success-alert").hide();
+    $("#waiting-alert").show();
+}
 //打开新窗口
 function openWin(url,id){
     var a = $(document).createElement('a');

@@ -10,44 +10,68 @@
     <script src="js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="stylesheets/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="stylesheets/video_style.css">
-</head>
+ </head>
 <body data-gr-c-s-loaded="true" >
 
+<div class="container p-3 ">
 
-<div class="container pt-5 ">
-    <div class="panel">
+    <div class="shadow-lg p-4 mb-4 mt-4  panel" >
         <h4 class="display-4">小剧场
             <button class="font-weight-bold btn btn-sm btn-dark">
-                BETA  <span class="font-weight-bolder badge badge-light">2.0</span>
+                BETA  <span class="font-weight-bolder badge badge-light">3.0</span>
         </button></h4>
-        <!-- 快捷键解释行-->
+        <!-- 解释行-->
         <p>请尽量使用<kbd>中文</kbd>搜索内容，如是外语片，请使用<kbd>官方译名</kbd></p>
 
-        <div class="input-group">
+        <div class="shadow-sm p-4 mb-4 bg-white input-group">
+            <!-- 设置按键 -->
+            <button class="btn btn-secondary rounded dropdown-toggle" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                <strong>设置</strong>
+
+            </button>
+
+            <!-- 输入框 -->
             <input type="text" class="form-control " id="search_box" placeholder="请输入剧集...">
+
+            <!-- 搜索按键-->
             <div class="input-group-append">
                 <button type="button" class="btn btn-outline-secondary" id="submit-block">搜索</button>
             </div>
 
+            <!-- 设置页面 -->
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="nav nav-pills">
+                    <li class="nav-item mt-2 ml-2 pl-2">
+                        <form class="mt-2">
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="Safari">
+                                <label class="custom-control-label" for="Safari">Safari</label>
+                            </div>
+                        </form>
+                    </li>
+
+                </ul>
+            </div>
         </div>
 
         <!-- 成功、失败和等待提示框-->
         <!-- 成功  -->
         <div id="success-alert" class="alert alert-success fade show" style="display: none">
+            <span></span>
             <button type="button" class="close" data-dismiss="alert">&times;</button>
-
         </div>
         <!-- 失败  -->
         <div id="fail-alert"class="alert alert-danger fade show"style="display: none">
-            <button type="button" class="close" data-dismiss="alert" style="display: none">&times;</button>
-
+            <span></span>
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
         </div>
 
         <!-- 等待  -->
-        <div id="waiting-alert" class="alert alert-info fade show" style="display: none">
+        <div id="waiting-alert" class="alert alert-info fade show " style="display: none">
             别急呀～亲！(˶‾᷄ ⁻̫ ‾᷅˵) 我还在努力给你找资源呢～ (*≧ω≦)−★
-            <div class="spinner-border spinner-border-sm  text-primary"></div>
+            <div class="spinner-border spinner-border-sm text-primary"></div>
         </div>
+
         <div id="result" style="display: none">
             <!-- Nav tabs -->
             <ul class="mt-5 nav nav-tabs">
@@ -95,10 +119,14 @@
             </div>
         </div>
     </div>
-
-    <div class="card-footer">Copyright © 2020 <br>本站不提供数据存储只提供检索服务<br>用户一切行为与本站无关</div>
+    <footer class="blockquote-footer">
+        <div>
+            Copyright © 2020 <br>本站不提供数据存储只提供检索服务<br>用户一切行为与本站无关
+        </div>
+    </footer>
 
 </div>
+
 <script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>

@@ -38,7 +38,7 @@ $(document).ready(function () {
 function search(){
     //console.log("测试搜索按键");
 
-    //搜索框 Alert
+    //搜索框 空值提醒
     var search_block = $("#search_box").val();
     if(!search_block){
         alert("搜索框不能为空");
@@ -48,12 +48,60 @@ function search(){
     show_waiting_alert();
     //清空结果
     $("#result-tbody").empty();
-    //返回搜索结果
+
+    OK_resource(search_block);
+
+}
+
+
+
+//episode detail
+function video(url, title, sort, time) {
+    var episode_tbody = $("#episode-tbody");
+    episode_tbody.empty();
+    var Pri_split = url.split('$$$');
+    var text = "";
+    var m3u8 = "";
+    Pri_split.forEach(e=>{
+        var split_url = e.split('#');
+        for(let i = 0;i<split_url.length;i++){
+            var Episode = split_url[i].split('$');
+
+            if(Episode[1].includes('m3u8')) {
+                m3u8 = m3u8 +"<tr><td>"+ (i+1) + "</td><td>" + title + "</td><td> <a target='_blank' href = '"+Episode[1]+"'>" + Episode[0] +"</a></td></tr>";
+
+            }else{
+                text = text +"<tr><td>"+ (i+1) + "</td><td>" + title + "</td><td> <a target='_blank' href = '"+Episode[1]+"'>" + Episode[0] +"</a></td></tr>";
+            }
+
+            //console.log(Episode[0]+":"+Episode[1]);
+        }
+
+    });
+    if($("#Safari").is(':checked')){
+        episode_tbody.append(m3u8);
+        //console.log(m3u8);
+    }else{
+        episode_tbody.append(text);
+    }
+    //console.log(url);
+
+}
+
+
+/*
+ OK采集地址：https://api.okzy.tv/api.php/provide/vod/at/json/
+ OK视频列表地址：https://api.okzy.tv/api.php/provide/vod/at/json/?ac=list
+ OK视频详情地址：https://api.okzy.tv/api.php/provide/vod/at/json/?ac=detail
+*/
+// OK资源采集
+function OK_resource(value){
     var interF_OK = "https://api.okzy.tv/api.php/provide/vod/at/json/?ac=detail";
     $.post(interF_OK,{
-            wd: search_block
+            wd: value
         },
         function (data,status){
+            //转化为JSON格式
             var jsonObj = jQuery.parseJSON(data);
             var list = jsonObj["list"];
             var number = 0;
@@ -63,47 +111,25 @@ function search(){
                 $("#result-tbody").append(text);
                 number = index+1;
             });
-            if(number == 0){
-                $("#fail-alert").html("(╯°Д°）╯没有啊！啥都没有啊！！！ 咱换个名字好不好啊  (;´༎ຶД༎ຶ`)");
-                show_fail_alert();
-                $("#result").hide();
-            }else{
-                $("#success-alert").html("٩(˃̶͈̀௰˂̶͈́)و 亲！我找到了"+number+"个资源，快点词条看看吧 o(*////▽////*)q")
-                show_success_alert();
-                //显示搜索结果panel
-                $("#result").show();
-            }
-            console.log(list);
+            //console.log(list);
+            alert_info(number);
 
         });
-
-
 }
 
-
-//episode detail
-function video(url, title, sort, time) {
-    var episode_tbody = $("#episode-tbody");
-    episode_tbody.empty();
-    var Pri_split = url.split('$$$');
-    var text = "";
-    Pri_split.forEach(e=>{
-        var split_url = e.split('#');
-        for(let i = 0;i<split_url.length;i++){
-            var Episode = split_url[i].split('$');
-            if(Episode[1].includes('m3u8')) continue;
-            text = text +"<tr><td>"+ (i+1) + "</td><td>" + title + "</td><td> <a target='_blank' href = '"+Episode[1]+"'>" + Episode[0] +"</a></td></tr>";
-            //console.log(Episode[0]+":"+Episode[1]);
-        }
-
-    })
-    episode_tbody.append(text);
-    //console.log(url);
-
+//显示提醒
+function alert_info(value){
+    if(value === 0){
+        $("#fail-alert span").text("(╯°Д°）╯ 没有啊！啥都没有啊！！！ 咱换个名字好不好啊   (;´༎ຶД༎ຶ`)");
+        show_fail_alert();
+        $("#result").fadeOut();
+    }else{
+        $("#success-alert span").text("٩(˃̶͈̀௰˂̶͈́)و  亲！我找到了"+value+"个资源，快进入词条看看吧  o(*////▽////*)q")
+        show_success_alert();
+        //显示搜索结果panel
+        $("#result").fadeIn();
+    }
 }
-// OK采集地址：https://api.okzy.tv/api.php/provide/vod/at/json/
-// OK视频列表地址：https://api.okzy.tv/api.php/provide/vod/at/json/?ac=list
-// OK视频详情地址：https://api.okzy.tv/api.php/provide/vod/at/json/?ac=detail
 
 //隐藏提示框
 function hide_all_alert(){
@@ -115,12 +141,12 @@ function hide_all_alert(){
 //显示成功提示框
 function show_success_alert(){
     $("#fail-alert").hide();
-    $("#success-alert").show();
+    $("#success-alert").slideDown();
     $("#waiting-alert").hide();
 }
 //显示失败提示框
 function show_fail_alert() {
-    $("#fail-alert").show();
+    $("#fail-alert").slideDown();
     $("#success-alert").hide();
     $("#waiting-alert").hide();
 
@@ -129,7 +155,7 @@ function show_fail_alert() {
 function show_waiting_alert(){
     $("#fail-alert").hide();
     $("#success-alert").hide();
-    $("#waiting-alert").show();
+    $("#waiting-alert").slideDown();
 }
 //打开新窗口
 function openWin(url,id){
@@ -154,3 +180,11 @@ function openWin(url,id){
         }
         return str;
     }
+    /*
+    清风api：http://api.ttupp.com/cgi/qingfeng
+    参数：
+        type=search,video
+        jiekou= 1,2,3,4,5;
+        value=
+    http://api.ttupp.com/cgi/qingfeng?type=search&jiekou=5&value=
+     */

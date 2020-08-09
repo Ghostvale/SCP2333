@@ -48,8 +48,10 @@ function search(){
     show_waiting_alert();
     //清空结果
     $("#result-tbody").empty();
-
+    //OK资源库
     OK_resource(search_block);
+
+
 
 }
 
@@ -78,7 +80,7 @@ function video(url, title, sort, time) {
         }
 
     });
-    if($("#Safari").is(':checked')){
+    if($('input[name=brower]:checked').val() ==="Safari"){
         episode_tbody.append(m3u8);
         //console.log(m3u8);
     }else{
@@ -188,3 +190,5 @@ function openWin(url,id){
         value=
     http://api.ttupp.com/cgi/qingfeng?type=search&jiekou=5&value=
      */
+
+

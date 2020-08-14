@@ -4,6 +4,12 @@ $(document).keyup(function(event){
         $("#submit-block").trigger("click");
     }
 });
+
+
+//browser icon选择器
+browser_check_it();
+
+
 $(document).ready(function () {
     //预设搜索内容
     //$("#search_box").val("千谎百计");
@@ -42,20 +48,15 @@ function search(){
     var search_block = $("#search_box").val();
     if(!search_block){
         alert("搜索框不能为空");
-        return;
+    } else{
+        //显示等待
+        show_waiting_alert();
+        //清空结果
+        $("#result-tbody").empty();
+        //OK资源库
+        OK_resource(search_block);
     }
-    //显示等待
-    show_waiting_alert();
-    //清空结果
-    $("#result-tbody").empty();
-    //OK资源库
-    OK_resource(search_block);
-
-
-
 }
-
-
 
 //episode detail
 function video(url, title, sort, time) {
@@ -78,9 +79,8 @@ function video(url, title, sort, time) {
 
             //console.log(Episode[0]+":"+Episode[1]);
         }
-
     });
-    if($('input[name=brower]:checked').val() ==="Safari"){
+    if($('input[name=browser]:checked').val() ==="Safari"){
         episode_tbody.append(m3u8);
         //console.log(m3u8);
     }else{
@@ -115,7 +115,6 @@ function OK_resource(value){
             });
             //console.log(list);
             alert_info(number);
-
         });
 }
 
@@ -159,6 +158,20 @@ function show_waiting_alert(){
     $("#success-alert").hide();
     $("#waiting-alert").slideDown();
 }
+
+// 选择 browser 适配 check icon
+function browser_check_it(){
+
+    var all_inputNode = $('input[name=browser]');
+    for(let i =0;i < all_inputNode.length;i++){
+        all_inputNode[i].parentElement.children[0].style.opacity = 0;
+    }
+    $('input[name=browser]:checked')[0].parentElement.children[0].style.opacity = 1;
+}
+//模拟切换浏览器
+function browser_on_click() {
+    browser_check_it();
+}
 //打开新窗口
 function openWin(url,id){
     var a = $(document).createElement('a');
@@ -169,7 +182,7 @@ function openWin(url,id){
 }
 
 //转化 Unicode 为汉字
-    function ToChWords(data){
+function ToChWords(data){
         if(data === '' || typeof data == 'undefined') return;
         data = data .split("\\u");
         var str = '';
@@ -190,5 +203,3 @@ function openWin(url,id){
         value=
     http://api.ttupp.com/cgi/qingfeng?type=search&jiekou=5&value=
      */
-
-

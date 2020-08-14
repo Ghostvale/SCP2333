@@ -9,7 +9,7 @@
     <script src="js/popper.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="stylesheets/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="stylesheets/video_style.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
     <link rel="stylesheet" href="stylesheets/all.css">
     <script src="js/all.js"></script>
 
@@ -24,21 +24,23 @@
 
         <!-- 设置浏览器 -->
         <div class="nav-item dropdown ml-3">
-            <a class="nav-link dropdown-toggle text-dark" href="#" id="browerDrop" data-toggle="dropdown">
+            <a class="nav-link dropdown-toggle text-dark" href="#" id="browserDrop" data-toggle="dropdown">
                 浏览器
             </a>
             <div class="dropdown-menu dropdown-menu-lg">
                 <form class="mt-1">
-                    <div class="form-check ml-2">
-                        <label class="form-control-label" for="General-brower" >
-                            <input type="radio" class="form-check-input" id="General-brower" name="brower" value="General-brower" checked>
-                            通用
+                    <div class="row form-check ml-2" onclick="browser_on_click()">
+                        <label class="form-control-label radio-label" for="General-browser" >
+                            <i class="fas fa-check fa-lg"></i>
+                            <input type="radio" class="form-check-input" id="General-browser" name="browser" value="General-browser" checked>
+                            <strong class="ml-1">通用</strong>
                         </label>
                     </div>
-                    <div class="form-check ml-2">
+                    <div class="row form-check ml-2" onclick="browser_on_click()">
                         <label class="form-control-label" for="Safari">
-                            <input type="radio" class="form-check-input" id="Safari" name="brower" value="Safari">
-                            Safari
+                            <i class="fas fa-check fa-lg"></i>
+                            <input type="radio" class="form-check-input" id="Safari" name="browser" value="Safari">
+                            <strong class="ml-1">Safari</strong>
                         </label>
                     </div>
                 </form>
@@ -52,7 +54,7 @@
     <div class="shadow-lg p-4 mb-4 mt-4 panel" >
         <h4 class="display-4">小剧场
             <button class="font-weight-bold btn btn-sm btn-dark">
-                BETA  <span class="font-weight-bolder badge badge-light">3.1.1</span>
+                BETA  <span class="font-weight-bolder badge badge-light">3.1.2</span>
         </button></h4>
         <!-- 解释行-->
         <p>请尽量使用<kbd>中文</kbd>搜索内容，如是外语片，请使用<kbd>官方译名</kbd></p>

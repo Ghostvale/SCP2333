@@ -59,33 +59,33 @@
         <!-- 解释行-->
         <p>请尽量使用<kbd>中文</kbd>搜索内容，如是外语片，请使用<kbd>官方译名</kbd></p>
 
-        <div class="shadow-sm mb-4 bg-white input-group">
+        <form class="shadow-sm mb-4 bg-white input-group">
 
             <!-- 输入框 -->
-            <input type="text" class="form-control " id="search_box" placeholder="请输入剧集...">
+            <input type="text" class="form-control" id="search_box" placeholder="请输入剧集..." required>
 
             <!-- 搜索按键-->
             <div class="input-group-append">
                 <button type="button" class="btn btn-outline-secondary" id="submit-block">搜索</button>
             </div>
 
-        </div>
+        </form>
 
 
         <!-- 成功、失败和等待提示框-->
         <!-- 成功  -->
-        <div id="success-alert" class="alert alert-success fade show" style="display: none">
+        <div id="success-alert" class="alert alert-success fade show" >
             <span></span>
             <button type="button" class="close" data-dismiss="alert">&times;</button>
         </div>
         <!-- 失败  -->
-        <div id="fail-alert"class="alert alert-danger fade show"style="display: none">
+        <div id="fail-alert"class="alert alert-danger fade show">
             <span></span>
             <button type="button" class="close" data-dismiss="alert">&times;</button>
         </div>
 
         <!-- 等待  -->
-        <div id="waiting-alert" class="alert alert-info fade show " style="display: none">
+        <div id="waiting-alert" class="alert alert-info fade show ">
             别急呀～亲！(˶‾᷄ ⁻̫ ‾᷅˵) 我还在努力给你找资源呢～ (*≧ω≦)−★
             <div class="spinner-border spinner-border-sm text-primary"></div>
         </div>

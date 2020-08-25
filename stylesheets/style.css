@@ -4,3 +4,6 @@
 .form-check-input{
     opacity: 0;
 }
+.alert{
+display: none;
+}

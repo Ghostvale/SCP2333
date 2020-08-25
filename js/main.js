@@ -201,5 +201,11 @@ function ToChWords(data){
         type=search,video
         jiekou= 1,2,3,4,5;
         value=
-    http://api.ttupp.com/cgi/qingfeng?type=search&jiekou=5&value=
+        "[ok]播放源(推荐)":"1",
+            "[最大]播放源(均衡)":"2",
+            "[酷播]播放源(均衡)":"6",
+            "[最新]播放源(更新快)":"8",
+            "[天空]播放源(推荐)":"10",
+            "[看看]播放源(推荐)":"11"
+    http://api.ttupp.com/cgi/qingfeng?type=search&jiekou=1&value=
      */
